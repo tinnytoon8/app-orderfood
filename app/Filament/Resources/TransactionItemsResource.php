@@ -10,7 +10,9 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TransactionItemsResource extends Resource
@@ -18,6 +20,28 @@ class TransactionItemsResource extends Resource
     protected static ?string $model = TransactionItems::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+
+    public static string $parentResource = TransactionResource::class;
+
+    public static function getRecordTitle(?Model $record): string|Htmlable|null
+    {
+        return $record->title;
+    }
+
+    public static function canEdit(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canCreate(): bool
+    {
+        return false;
+    }
 
     public static function form(Form $form): Form
     {
@@ -49,23 +73,6 @@ class TransactionItemsResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('transaction_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('menus_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('note')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('quantity')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('price')
-                    ->money()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('subtotal')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -74,17 +81,36 @@ class TransactionItemsResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('transaction_id')
+                    ->numeric()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('menu.name')
+                    ->label('Menu Name')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('note')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('quantity')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('price')
+                    ->money('IDR')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('subtotal')
+                    ->money('IDR')
+                    ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+                // ]),
             ]);
     }
 
@@ -99,8 +125,8 @@ class TransactionItemsResource extends Resource
     {
         return [
             'index' => Pages\ListTransactionItems::route('/'),
-            'create' => Pages\CreateTransactionItems::route('/create'),
-            'edit' => Pages\EditTransactionItems::route('/{record}/edit'),
+            // 'create' => Pages\CreateTransactionItems::route('/create'),
+            // 'edit' => Pages\EditTransactionItems::route('/{record}/edit'),
         ];
     }
 }
