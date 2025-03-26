@@ -18,6 +18,7 @@ class Toast extends Component
         $this->message1 = $data['message1'];
         $this->message2 = $data['message2'];
         $this->type = $data['type'];
+        $this->visible = true;
 
         $this->dispatch('hide-toast', ['timeout' => 3000]);
     }
