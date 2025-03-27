@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pages;
 
+use App\Livewire\Traits\CartManagement;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Session;
 use Livewire\Component;
@@ -78,6 +79,6 @@ class CartPage extends Component
     #[Layout('components.layouts.page')]
     public function render()
     {
-        return view('livewire.components.cart-page');
+        return view('payment.cart-page');
     }
 }

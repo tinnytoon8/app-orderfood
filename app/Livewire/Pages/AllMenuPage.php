@@ -28,7 +28,7 @@ class AllMenuPage extends Component
     {
         $filterdProducts = $this->getFilteredItems();
 
-        return view('livewire.components.all-menu-page', [
+        return view('product.all-menu-page', [
             'filteredProducts' => $filterdProducts,
         ]);
     }

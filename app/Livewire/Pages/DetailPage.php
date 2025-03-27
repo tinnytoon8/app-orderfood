@@ -69,6 +69,6 @@ class DetailPage extends Component
     #[Layout('components.layouts.app')]
     public function render()
     {
-        return view('livewire.pages.detail-page');
+        return view('product.detail-page');
     }
 }

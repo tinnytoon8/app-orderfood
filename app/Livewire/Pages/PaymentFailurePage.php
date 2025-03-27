@@ -10,6 +10,6 @@ class PaymentFailurePage extends Component
     #[Layout('components.layouts.page')]
     public function render()
     {
-        return view('livewire.components.payment-failure-page');
+        return view('payment.payment-failure-page');
     }
 }

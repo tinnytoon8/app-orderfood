@@ -10,6 +10,6 @@ class ScanPage extends Component
     #[Layout('components.layouts.app')]
     public function render()
     {
-        return view('livewire.components.scan-page');
+        return view('product.scan-page');
     }
 }

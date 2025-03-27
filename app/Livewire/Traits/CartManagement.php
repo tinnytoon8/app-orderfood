@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Traits;
 
-trait CardManagement
+trait CartManagement
 {
     public function increment($index)
     {

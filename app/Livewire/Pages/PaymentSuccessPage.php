@@ -16,6 +16,6 @@ class PaymentSuccessPage extends Component
     #[Layout('components.layouts.app')]
     public function render()
     {
-        return view('livewire.components.payment-success-page');
+        return view('payment.payment-success-page');
     }
 }

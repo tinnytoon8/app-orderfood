@@ -2,10 +2,12 @@
 
 namespace App\Livewire\Pages;
 
+use App\Livewire\Traits\CartManagement;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Session;
 use Livewire\Component;
+use Illuminate\Support\Str;
 
 class CheckoutPage extends Component
 {
@@ -47,6 +49,6 @@ class CheckoutPage extends Component
     #[Layout('components.layouts.app')]
     public function render()
     {
-        return view('livewire.components.checkout-page');
+        return view('payment.checkout-page');
     }
 }
