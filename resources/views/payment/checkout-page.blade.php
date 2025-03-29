@@ -38,7 +38,7 @@
 
         <div>
             <h2 class="mb-4 text-lg font-medium text-black-100">
-                Makanan yang dipesan
+                Menu yang dipesan
             </h2>
 
             <livewire:components.menu-item-list
