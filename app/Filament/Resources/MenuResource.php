@@ -3,16 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\MenuResource\Pages;
-use App\Filament\Resources\MenuResource\RelationManagers;
 use App\Models\Menu;
 use Filament\Forms;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class MenuResource extends Resource
 {
@@ -94,8 +90,7 @@ class MenuResource extends Resource
                 Tables\Columns\TextColumn::make('percent')
                     ->sortable(),
                 Tables\Columns\IconColumn::make('is_promo')
-                    ->boolean()
-                    ->sortable(),
+                    ->boolean(),
                 Tables\Columns\TextColumn::make('categories.name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')

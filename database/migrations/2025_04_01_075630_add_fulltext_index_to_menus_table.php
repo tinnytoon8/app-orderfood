@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('menus', function (Blueprint $table) {
-            $table->boolean('is_promo')->change();
+            $table->fullText(['name', 'description']);
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('menus', function (Blueprint $table) {
-            $table->string('is_promo')->change();
+            $table->dropIndex(['name', 'description']);
         });
     }
 };

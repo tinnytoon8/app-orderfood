@@ -50,7 +50,7 @@ Route::middleware(CheckTableNumber::class)->controller(TransactionController::cl
 });
 
 // Webhook Update Pembayaran
-Route::get('/payment/webhook', [TransactionController::class, 'handleWebhook'])->name('payment.webhook');
+Route::post('/payment/webhook', [TransactionController::class, 'handleWebhook'])->name('payment.webhook');
 
 Route::controller(QRController::class)->group(function(){
     Route::post('/store-qr-result', 'storeResult')->name('product.scan.table');

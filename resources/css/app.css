@@ -10,7 +10,9 @@ dialog[open] {
 dialog {
     opacity: 0;
     transform: scaleY(0);
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out,
+    transition:
+        opacity 0.3s ease-out,
+        transform 0.3s ease-out,
         overlay 0.3s ease-out allow-discrete,
         display 0.3s ease-out allow-discrete;
 }
@@ -23,7 +25,9 @@ dialog {
 
 dialog::backdrop {
     background-color: rgb(0 0 0 / 0%);
-    transition: display 0.3s allow-discrete, overlay 0.3s allow-discrete,
+    transition:
+        display 0.3s allow-discrete,
+        overlay 0.3s allow-discrete,
         background-color 0.3s;
 }
 

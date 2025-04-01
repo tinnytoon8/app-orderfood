@@ -12,7 +12,7 @@ use Livewire\Component;
 class DetailPage extends Component
 {
     public $categories;
-    public $mathedCategory;
+    public $matchedCategory;
     public $menu;
     public $title = 'Favorite';
 
@@ -26,7 +26,7 @@ class DetailPage extends Component
             abort(404);
         }
 
-        $this->mathedCategory = collect($this->categories)->firstWhere('id', $this->menu->categories_id);
+        $this->matchedCategory = collect($this->categories)->firstWhere('id', $this->menu->categories_id);
 
     }
 

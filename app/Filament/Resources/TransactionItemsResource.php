@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TransactionItemsResource\Pages;
-use App\Filament\Resources\TransactionItemsResource\RelationManagers;
 use App\Models\TransactionItems;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -11,9 +10,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TransactionItemsResource extends Resource
 {

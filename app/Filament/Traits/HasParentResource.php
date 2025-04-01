@@ -3,7 +3,7 @@
 namespace App\Filament\Traits;
 
 use Exception;
-use Filament\Forms\Components\Builder;
+use Illuminate\Database\Eloquent\Builder; // Perbaikan
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -13,12 +13,12 @@ trait HasParentResource
 
     public function bootHasParentResource(): void
     {
-        if($parent = (request()->route('parent') ?? request()->input('parent'))) {
-            $parentResource = $this->gerParentResource();
+        if ($parent = (request()->route('parent') ?? request()->input('parent'))) {
+            $parentResource = $this->getParentResource();
 
             $this->parent = $parentResource::resolveRecordRouteBinding($parent);
 
-            if(!$this->parent){
+            if (!$this->parent) {
                 throw new ModelNotFoundException();
             }
         }
@@ -28,18 +28,19 @@ trait HasParentResource
     {
         $parentResource = static::getResource()::$parentResource;
 
-        if(!isset($parentResource)){
-            throw new Exception('Parent resource is not set for'. static::class);
+        if (!isset($parentResource)) {
+            throw new Exception('Parent resource is not set for ' . static::class);
         }
 
         return $parentResource;
     }
 
+    // Perbaikan tipe Builder
     protected function applyFiltersToTableQuery(Builder $query): Builder
     {
         $query = parent::applyFiltersToTableQuery($query);
 
-        return $query->where($this->getParentRelationshipKey(), $this->parent->getKey);
+        return $query->where($this->getParentRelationshipKey(), $this->parent->getKey());
     }
 
     public function getParentRelationshipKey(): string
@@ -65,11 +66,11 @@ trait HasParentResource
             $parentResource::getUrl(name: $this->getChildPageNamePrefix() . '.index')
         ];
 
-        if(isset($this->record)){
-            $breadcrumb[] = $resource::getRecordTitle($this->record);
+        if (isset($this->record)) {
+            $breadcrumbs[] = $resource::getRecordTitle($this->record);
         }
 
-        $breadcrumb[] = $this->getBreadCrumb();
+        $breadcrumbs[] = $this->getBreadcrumb();
 
         return $breadcrumbs;
     }

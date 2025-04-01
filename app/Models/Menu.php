@@ -60,7 +60,7 @@ class Menu extends Model
             ->get();
     }
 
-    public function getFavoriteFood()
+    public function getFavoriteMenu()
     {
         return TransactionItems::select(
             'menus.*',
@@ -68,7 +68,7 @@ class Menu extends Model
         )
         ->join('menus', 'transaction_items.menus_id', '=', 'menus.id')
         ->groupBy('menus.id')
-        ->orderByDes('total_sold')
+        ->orderByDesc('total_sold')
         ->get();
     }
 }

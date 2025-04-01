@@ -10,6 +10,8 @@ class ListBarcodes extends ListRecords
 {
     protected static string $resource = BarcodeResource::class;
 
+    protected static?string $title = 'Qr Codes';
+
     protected function getHeaderActions(): array
     {
         return [

@@ -38,6 +38,6 @@ class CustomerModal extends Component
 
     public function render()
     {
-        return view('livewire.components.customer-modal');
+        return view('livewire.customer-modal');
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barcode;
 use App\Models\Category;
-use App\Models\Foods;
+use App\Models\Menu;
 use App\Models\Transaction;
 use App\Models\TransactionItems;
 use Illuminate\Http\Request;
@@ -39,7 +39,7 @@ class TransactionController extends Controller
             $externalId = session('external_id');
 
             if (empty($externalId)) {
-                return view('payment.payment-failure-page');
+                return view('payment.failure');
             }
 
 
@@ -85,8 +85,8 @@ class TransactionController extends Controller
 
                 $category = Category::find($item['categories_id'])->name;
 
-                $foodSubtotal = $price * $item['quantity'];
-                $subTotal += $foodSubtotal;
+                $menuSubtotal = $price * $item['quantity'];
+                $subTotal += $menuSubtotal;
 
                 $url = route('product.detail', ['id' => $item['id']]);
 
@@ -160,8 +160,7 @@ class TransactionController extends Controller
 
                 TransactionItems::create([
                     'transaction_id' => $transaction->id,
-                    'foods_id' => $cartItem['id'],
-                    'note' => $cartItem['note'],
+                    'menus_id' => $cartItem['id'],
                     'quantity' => $cartItem['quantity'],
                     'price' => $price,
                     'subtotal' => $price * $cartItem['quantity'],
@@ -179,7 +178,7 @@ class TransactionController extends Controller
                 'trace' => $e->getTraceAsString(),
             ]);
 
-            return view('payment.payment-failure-page');
+            return view('payment.failure');
         }
     }
 
@@ -224,7 +223,9 @@ class TransactionController extends Controller
     {
         $webhookToken = $request->header('x-callback-token');
 
-        $expectedToken = config('xendit.webhook_token');
+        // $expectedToken = config('xendit.webhook_token');
+        $expectedToken = env('XENDIT_WEBHOOK_TOKEN');
+
 
         if ($webhookToken !== $expectedToken) {
             return response()->json([
@@ -265,7 +266,6 @@ class TransactionController extends Controller
                 'message' => 'Failed to handle webhook.',
             ], 500);
         }
-
     }
 
     public function clearSession()

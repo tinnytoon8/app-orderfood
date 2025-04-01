@@ -53,7 +53,7 @@ class HomePage extends Component
         sleep(1);
         $searchResult = $menus->search(trim($this->term))->get();
 
-        return view('home', [
+        return view('home-page', [
             'searchResult' => $searchResult,
         ]);
     }

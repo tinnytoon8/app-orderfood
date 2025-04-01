@@ -8,6 +8,6 @@ class MainMenu extends Component
 {
     public function render()
     {
-        return view('livewire.components.main-menu');
+        return view('livewire.main-menu');
     }
 }

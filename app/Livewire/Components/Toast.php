@@ -25,6 +25,6 @@ class Toast extends Component
     
     public function render()
     {
-        return view('livewire.components.toast');
+        return view('livewire.toast');
     }
 }
